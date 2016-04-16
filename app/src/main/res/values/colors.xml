@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="news_title_readed">#5b5b5b</color>
+    <color name="news_title_unread">#000000</color>
+    <color name="placeholder">#eaeaea</color>
+    <color name="time">#8f8f8f</color>
+    <color name="background">#fafafa</color>
 </resources>

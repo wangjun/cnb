@@ -1,21 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-        <variable name="news" type="me.yugy.cnbeta.model.News"/>
-    </data>
+    <ImageView
+        android:id="@+id/image"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_height="72dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_width="72dp"
+        android:scaleType="centerCrop"
+        tools:src="@color/placeholder"
+        />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="16dp">
+    <TextView
+        android:id="@+id/title"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/image"
+        android:layout_toStartOf="@id/image"
+        android:layout_width="match_parent"
+        android:maxLines="2"
+        android:textColor="@color/news_title_unread"
+        android:textSize="18sp"
+        tools:text="《权力的游戏》完结篇要缩水？ 最后两季酝酿只拍13集"
+        />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{news.title}"
-            />
+    <me.yugy.app.common.widget.RelativeTimeTextView
+        android:id="@+id/time"
+        android:layout_alignBottom="@id/image"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/image"
+        android:layout_toStartOf="@id/image"
+        android:layout_width="match_parent"
+        android:maxLines="1"
+        android:textColor="@color/time"
+        android:textSize="14sp"
+        tools:text="3分钟前"
+        />
 
-    </RelativeLayout>
-</layout>
+</RelativeLayout>
