@@ -23,7 +23,7 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         sInstance = getApplicationContext();
-        ButterKnife.setDebug(BuildConfig.DEBUG);
+//        ButterKnife.setDebug(BuildConfig.DEBUG);
         DebugUtils.setLogEnable(BuildConfig.DEBUG);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.color.placeholder)
@@ -37,6 +37,7 @@ public class Application extends android.app.Application {
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .diskCacheSize(20 * 1024 * 1024)
                 .defaultDisplayImageOptions(options)
+//                .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);
     }

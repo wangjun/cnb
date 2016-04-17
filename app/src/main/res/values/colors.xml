@@ -9,4 +9,5 @@
     <color name="placeholder">#eaeaea</color>
     <color name="time">#8f8f8f</color>
     <color name="background">#fafafa</color>
+    <color name="shadow">#33000000</color>
 </resources>

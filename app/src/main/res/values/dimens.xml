@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="loading_footer_padding">16dp</dimen>
+    <dimen name="news_image_size">72dp</dimen>
+    <dimen name="shadow_width">8dp</dimen>
+</resources>

@@ -10,10 +10,10 @@
         android:id="@+id/image"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_height="72dp"
+        android:layout_height="@dimen/news_image_size"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_width="72dp"
+        android:layout_width="@dimen/news_image_size"
         android:scaleType="centerCrop"
         tools:src="@color/placeholder"
         />

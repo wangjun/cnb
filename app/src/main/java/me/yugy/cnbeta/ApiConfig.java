@@ -25,6 +25,14 @@ public class ApiConfig {
         return API_PREFIX + "?" + param;
     }
 
+    public static String getNewsDetail(int sid) {
+        String param = "app_key=10000&format=json&method=Article.NewsContent&sid=" + sid
+                + "&timestamp=" + System.currentTimeMillis() + "&v=1.0&mpuffgvbvbttn3Rc";
+        String sign = getSign(param);
+        param += "&sign=" + sign;
+        return API_PREFIX + "?" + param;
+    }
+
     private static final char[] a = { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70 };
 
     private static String getSign(String paramString) {
