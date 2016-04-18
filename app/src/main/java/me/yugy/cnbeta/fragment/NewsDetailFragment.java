@@ -1,6 +1,6 @@
 package me.yugy.cnbeta.fragment;
 
-import android.os.Build;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 
 import butterknife.Bind;
 import me.yugy.app.common.core.BaseFragment;
-import me.yugy.app.common.utils.VersionUtils;
+import me.yugy.app.common.utils.TextUtils;
 import me.yugy.cnbeta.R;
 import me.yugy.cnbeta.listener.OnPagerSelectListener;
 import me.yugy.cnbeta.model.News;
@@ -47,6 +47,7 @@ public class NewsDetailFragment extends BaseFragment implements OnPagerSelectLis
         if (!mNews.equals(news)) {
             mNews = news;
             mNewsDetail = null;
+            mWebView.loadUrl("javascript:setEmpty()");
         }
     }
 
@@ -64,12 +65,15 @@ public class NewsDetailFragment extends BaseFragment implements OnPagerSelectLis
         return R.layout.fragment_news_detail;
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mWebView.getSettings().setBuiltInZoomControls(false);
         mWebView.getSettings().setDisplayZoomControls(false);
         mWebView.getSettings().setSupportZoom(false);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.loadUrl("file:///android_asset/template/detail.html");
     }
 
     @Override
@@ -101,19 +105,16 @@ public class NewsDetailFragment extends BaseFragment implements OnPagerSelectLis
                 public void onResponse(NewsDetailResponse response) {
                     if (response.checkValidate()) {
                         mNewsDetail = response.newsDetail;
+                        mNews.commentCount = mNewsDetail.commentCount;
+                        mNews.viewCount = mNewsDetail.viewCount;
                         if (mWebView != null) {
-                            String content =
-                                    "<html>\n" +
-                                        "<head>\n" +
-                                            "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"./style.css\" />\n" +
-                                            "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\" />\n" +
-                                        "</head>\n" +
-                                        "<body>\n" +
-                                            response.newsDetail.bodyText + "\n" +
-                                        "</body>\n" +
-                                    "</html>";
-                            mWebView.loadDataWithBaseURL("file:///android_asset/template/detail.html",
-                                    content, "text/html; charset=utf-8", "UTF-8", null);
+                            mWebView.loadUrl("javascript:setTitle('" + mNews.title + "')");
+                            CharSequence time = TextUtils.getRelativeTimeDisplayString(
+                                    getContext(), mNews.timestamp);
+                            mWebView.loadUrl("javascript:setTime('" + time + "')");
+                            mWebView.loadUrl("javascript:setFrom('test')");
+                            mWebView.loadUrl("javascript:setContent('" + mNewsDetail.bodyText + "')");
+                            mWebView.loadUrl("javascript:setCommentCount('" + mNews.commentCount + "条评论')");
                         }
                     } else {
                         // TODO: 4/17/16
